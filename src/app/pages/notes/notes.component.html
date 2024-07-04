@@ -1,0 +1,19 @@
+<h4>Danh sách các note</h4>
+<div class="row">
+    <div class="col-md-3" *ngFor="let note of listNotes">
+      <div class="card" [ngClass]="'note-item '+ note.color">
+        <div class="card-body">
+          <h5 class="card-title text-bold">{{ note.title }}</h5>
+          <p>Người note : {{note.author}}.</p>
+          <p>Ngày tạo : {{convertNumberToDate(note.createdAt)}}</p>
+          <p>Ngày dự định hoàn thành : {{convertNumberToDate(note.endDate)}}</p>
+          <p>Tình trạng : 
+            <span *ngIf="note.isDone == false">Chưa hoàn thành</span>
+            <span *ngIf="note.isDone == true">Chưa hoàn thành</span>
+          </p>
+          <p>Nội dung : {{note.text}}</p>
+          <!-- Additional note details if needed -->
+        </div>
+      </div>
+    </div>
+</div>

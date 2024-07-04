@@ -1,0 +1,22 @@
+.card {
+    margin-bottom: 20px;
+}
+
+.note-item.red {
+    background-color: rgba(255, 99, 71, 0.8); /* Tomato with 80% opacity */
+  }
+  
+  .note-item.blue {
+    background-color: rgba(65, 105, 225, 0.8); /* Royal Blue with 80% opacity */
+  }
+  
+  .note-item.green {
+    background-color: rgba(50, 205, 50, 0.8); /* Lime Green with 80% opacity */
+}
+.note-item.yellow {
+    background-color: rgba(206, 203, 110, 0.8); /* Lime Green with 80% opacity */
+}
+
+.text-bold{
+    font-weight: bold;
+}
