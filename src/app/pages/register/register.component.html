@@ -1,0 +1,21 @@
+<div class="login-container">
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <h2>Register</h2>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" formControlName="email">
+        </div>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" formControlName="userName">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" formControlName="passWord">
+        </div>
+        <div nz-row nzJustify="center">
+            <button nz-button nzType="primary">Login</button>
+        </div>
+        <p class="text-center">Already have an account, please sign in <a class="register-text" routerLink="/login">here</a></p>
+    </form>
+</div>
