@@ -3,6 +3,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { UserInfoService } from '../../shared/userInfo';
 
 @Component({
   selector: 'app-home',
@@ -21,8 +22,12 @@ export class HomeComponent implements OnInit {
 
   isCollapsed = false;
 
-  constructor() { }
+  constructor(private ussv: UserInfoService) { }
 
   ngOnInit() { }
+
+  logout(){
+    this.ussv.logout()
+  }
 
 }

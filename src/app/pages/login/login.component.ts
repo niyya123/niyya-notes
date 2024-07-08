@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit{
     if(req){
       if(req.token){
         this.ussv.setToken(req.token)
+        this.ussv.setUserId(req.id)
         this.route.navigate(['/home']);
       }
     }

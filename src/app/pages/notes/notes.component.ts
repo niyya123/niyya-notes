@@ -28,9 +28,7 @@ export class NotesComponent implements OnInit {
   }
 
   convertNumberToDate(value:any){
-    if (!value || value.length !== 8) {
-      return value; // Return original value if it's not valid
-    }
+    value = value.toString()
 
     // Extract year, month, and day from the input string
     const year = value.substr(0, 4);

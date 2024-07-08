@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './guard/AuthGuard';
 import { AboutComponent } from './pages/about/about.component';
+import { UserInfoComponent } from './pages/user-info/user-info.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -14,6 +15,7 @@ export const routes: Routes = [
     children:[
       {path: '', pathMatch: 'full', redirectTo:'about'},
       {path:'about', component: AboutComponent},
+      {path:'userInfo', component: UserInfoComponent},
       { path: 'notes', loadChildren: () => import('./pages/notes/notes.routes').then(m => m.NOTES_ROUTES) }
     ]
   },
