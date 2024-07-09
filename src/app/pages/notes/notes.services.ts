@@ -11,4 +11,19 @@ export class NotesService{
     getNotes(): Promise<any>{
         return this.http.get<any>(`${apiUrl}/todos`).toPromise()
     }
+    getOneNote(id:any): Promise<any>{
+        return this.http.get<any>(`${apiUrl}/todos/${id}`).toPromise()
+    }
+
+    createNotes(data:any): Promise<any>{
+        return this.http.post<any>(`${apiUrl}/todos`,data).toPromise()
+    }
+
+    updateNotes(data:any): Promise<any>{
+        return this.http.put<any>(`${apiUrl}/todos/${data.id}`,data).toPromise()
+    }
+
+    deleteNote(id:any): Promise<any>{
+        return this.http.delete<any>(`${apiUrl}/todos/${id}`).toPromise()
+    }
 }

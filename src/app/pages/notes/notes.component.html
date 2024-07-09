@@ -1,17 +1,33 @@
-<h4>Danh sách các note</h4>
+<div class="row">
+  <div class="col">
+    <h4>Notes List</h4>
+  </div>
+  <div class="col text-end">
+    <button nz-button nzType="primary" (click)="openAddModal()">Create new note</button>
+  </div>
+</div>
+
 <div class="row">
     <div class="col-md-3" *ngFor="let note of listNotes">
       <div class="card" [ngClass]="'note-item '+ note.color">
         <div class="card-body">
-          <h5 class="card-title text-bold">{{ note.title }}</h5>
-          <p>Người note : {{note.author}}.</p>
-          <p>Ngày tạo : {{convertNumberToDate(note.createdAt)}}</p>
-          <p>Ngày dự định hoàn thành : {{convertNumberToDate(note.endDate)}}</p>
-          <p>Tình trạng : 
-            <span *ngIf="note.isDone == false">Chưa hoàn thành</span>
-            <span *ngIf="note.isDone == true">Chưa hoàn thành</span>
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title text-bold">{{ note.title }}</h5>
+            </div>
+            <div class="col text-end" *ngIf="checkPermission(note.author)">
+              <button nz-button nzShape="circle" nzType="text" class="me-1" (click)="update(note._id)"><span nz-icon nzType="edit" nzTheme="outline"></span></button>
+              <button nz-button nzDanger nzType="text" nzShape="circle" (click)="delete(note._id)"><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+            </div>
+          </div>
+
+          <p>Author : {{note.author}}.</p>
+          <p>Create date : {{convertNumberToDate(note.createdAt)}}</p>
+          <p>Estimate finish date : {{convertNumberToDate(note.endDate)}}</p>
+          <p>Status : 
+            <nz-switch nz-input [(ngModel)]="note.isDone" [nzDisabled]="!checkPermission(note.author)"></nz-switch>
           </p>
-          <p>Nội dung : {{note.text}}</p>
+          <p>Content : {{note.text}}</p>
           <!-- Additional note details if needed -->
         </div>
       </div>

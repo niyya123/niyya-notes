@@ -18,12 +18,17 @@ export class UserInfoService {
   constructor(private router: Router,
     private http: HttpClient) { }
 
-  setUser(user: any): void {
-    localStorage.setItem('user', JSON.stringify(user));
+  setUser(user:any): void {
+    let data = {
+      "email": user.email,
+      "username" : user.username
+    }
+    localStorage.setItem('user', JSON.stringify(data));
   }
 
   getUser(): any {
-    return this.user;
+    let test = localStorage.getItem('user')
+    return test ? JSON.parse(test) : null;
   }
 
   isAuthenticated(): boolean {
@@ -52,7 +57,7 @@ export class UserInfoService {
     this.router.navigate(['/login']);
   }
 
-  getUserInfo(): Promise<any> {
+  apiGetUserInfo(): Promise<any> {
     let currentToken = this.getToken()
     const headers = new HttpHeaders({
       'Authorization': `${currentToken}`

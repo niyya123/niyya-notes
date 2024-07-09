@@ -1,0 +1,49 @@
+<form [formGroup]="form">
+    <div nz-row nzJustify="space-between" [nzGutter]="12">
+        <div nz-col nzSpan="24">
+            Title :
+            <input type="text" nz-input placeholder="Type title" formControlName="title">
+        </div>
+
+    </div>
+    <div nz-row class="mt-1" [nzGutter]="12">
+        <div nz-col nzSpan="12">
+            Note color :
+            <nz-select formControlName="color" class="w-100">
+                <nz-option nzValue="red" nzLabel="Red"></nz-option>
+                <nz-option nzValue="green" nzLabel="Green"></nz-option>
+                <nz-option nzValue="yellow" nzLabel="Yellow"></nz-option>
+            </nz-select>
+        </div>
+        <div nz-col nzSpan="12">
+            Estimate finish date : <br>
+            <nz-date-picker formControlName="endDate" class="w-100" nzPlaceHolder="Pick date" nzFormat="dd/MM/yyyy"></nz-date-picker>
+        </div>
+    </div>
+    <div nz-row class="mt-1">
+        <div nz-col nzSpan="24">
+            Content :
+            <textarea class="custom-area" type="text" nz-input placeholder="Type content" formControlName="text"></textarea>
+        </div>
+    </div>
+    <div nz-row class="mt-1" *ngIf="id">
+        <div nz-col nzSpan="24">
+            Status :
+            <nz-switch nz-input formControlName="isDone"></nz-switch>
+        </div>
+    </div>
+    <div nz-row class="mt-3"  [nzGutter]="10" nzJustify="center">
+        <div nz-col nzSpan="3">
+            <button class="w-100" nz-button nzType="default" (click)="cancel()">Cancel</button>
+        </div>
+        <div nz-col nzSpan="3" *ngIf="!id">
+            <button class="w-100" nz-button nzType="primary" (click)="create()">Create</button>
+        </div>
+        <div nz-col nzSpan="3" *ngIf="id">
+            <button class="w-100" nz-button nzType="primary" (click)="update()">Update</button>
+        </div>
+        <div nz-col nzSpan="5" *ngIf="!id">
+            <button class="w-100" nz-button nzType="primary">Create then again </button>
+        </div>
+    </div>
+</form>
