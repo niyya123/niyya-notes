@@ -4,7 +4,8 @@ import {
   MenuUnfoldOutline,
   FormOutline,
   HomeOutline,
-  DeleteOutline
+  DeleteOutline,
+  MessageOutline
 } from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
@@ -13,7 +14,8 @@ const icons = [
   MenuUnfoldOutline,
   HomeOutline,
   FormOutline,
-  DeleteOutline
+  DeleteOutline,
+  MessageOutline
 ];
 
 export function provideNzIcons(): EnvironmentProviders {

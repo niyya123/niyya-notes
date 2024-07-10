@@ -10,6 +10,11 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { UserInfoService } from '../../shared/userInfo';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @Component({
   selector: 'app-notes',
@@ -22,7 +27,12 @@ import { UserInfoService } from '../../shared/userInfo';
     NzSwitchModule,
     CommonModule,
     NzInputModule,
-    FormsModule
+    FormsModule,
+    NzPaginationModule,
+    NzGridModule,
+    NzDividerModule,
+    NzSelectModule,
+    NzDatePickerModule
   ],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss'
@@ -36,7 +46,21 @@ export class NotesComponent implements OnInit {
     private ussv : UserInfoService
   ){}
 
+  filter={
+    title: '',
+    isDone: 2,
+    author: '',
+    createdAt: null,
+    endDate: null,
+    text:''
+  }
+
+
   listNotes:any
+  total:any
+  page = 1
+  pageSize = 8
+  pageSizeOption = [2,4,8]
 
   async ngOnInit(){
     await this.loadListNotes();
@@ -44,8 +68,31 @@ export class NotesComponent implements OnInit {
 
   async loadListNotes(){
     this.listNotes = []
-    let req = await this.notesSv.getNotes();
-    this.listNotes = req;
+    let data = {
+      page: this.page,
+      pageSize: this.pageSize,
+    }
+    let req = await this.notesSv.getNotes(data);
+    this.listNotes = req.todos;
+    this.total = req.totalItems;
+    console.log('req: ', req);
+  }
+
+  async searchListNotes(){
+    this.listNotes = []
+    let data = {
+      page: this.page,
+      pageSize: this.pageSize,
+      title: this.filter.title,
+      isDone: this.filter.isDone == 2 ? null : this.filter.isDone == 1 ? true : false,
+      author: this.filter.author,
+      createdAt: this.filter.createdAt ? this.convertDateToNumber(this.filter.createdAt) : null,
+      endDate: this.filter.endDate ? this.convertDateToNumber(this.filter.endDate) : null,
+      text:this.filter.text
+    }
+    let req = await this.notesSv.searchNotes(data);
+    this.listNotes = req.todos;
+    this.total = req.totalItems;
     console.log('req: ', req);
   }
 
@@ -61,6 +108,24 @@ export class NotesComponent implements OnInit {
     const formattedDate = `${day}/${month}/${year}`;
 
     return formattedDate;
+  }
+
+  convertDateToNumber(date:Date){
+    const year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString(); // Months are zero-based in JavaScript
+    let day = date.getDate().toString();
+  
+    // Ensure month and day are two digits
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+  
+    // Combine into YYYYMMDD format and convert to number
+    const formattedDate = `${year}${month}${day}`;
+    return parseInt(formattedDate, 10);
   }
 
   openAddModal(){
@@ -123,5 +188,57 @@ export class NotesComponent implements OnInit {
     if(author !== user.username){
       return false
     }else return true
+  }
+
+  changeStatus(id:any, newStatus:any){
+    this.modal.confirm({
+      nzTitle:'Change Status',
+      nzContent:'Are you sure you want to change status of this note?',
+      nzOnOk:async ()=>{
+        let data = {
+          id:id,
+          isDone : newStatus
+        }
+        console.log('data: ', data);
+        let req = await this.notesSv.updateStatusNotes(data)
+        if(req.code == 200){
+          this.noti.success('Success', 'Status changed successfully');
+          this.loadListNotes();
+        }else{
+          this.noti.error('Failed', 'Status update failed');
+          this.loadListNotes();
+        }
+      },
+      nzOnCancel:async ()=>{
+        let a = this.listNotes.find((note:any)=> note._id == id)
+        a.isDone = !a.isDone
+      }
+    })
+  }
+
+  changePageIndex($event:any){
+    this.page = $event;
+    this.loadListNotes();
+  }
+
+  changePageSize($event:any){
+    this.pageSize = $event
+    this.loadListNotes();
+  }
+
+  resetFilter(){
+    this.filter={
+      title: '',
+      isDone: 2,
+      author: '',
+      createdAt: '',
+      endDate: '',
+      text:''
+    }
+    this.loadListNotes();
+  }
+
+  search(){
+    this.searchListNotes()
   }
 }
