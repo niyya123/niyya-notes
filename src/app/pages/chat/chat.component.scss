@@ -1,28 +1,104 @@
 .chat-container {
-    width: 90%;
-    height: 100%;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-  }
-  
-  .messages {
-    height: 90%;
-    overflow-y: scroll;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .input-box {
-    margin-top: 10px;
-  }
-  
-  .input-box input {
-    width: 80%;
-    padding: 8px;
-    font-size: 16px;
-  }
-  
-  .input-box button {
-    padding: 8px 12px;
-    font-size: 16px;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  border: 1px solid #ccc;
+}
+
+.messages_container {
+  justify-content: flex-end;
+  overflow-y:scroll;
+  height: 94%;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+.input-box {
+  margin-top: 5px;
+  height: 6%;
+}
+
+.input-box input {
+  width: 100%;
+}
+
+.my-message-container{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
+.their-message-container{
+  text-align: start;
+  margin-left: 20px;
+}
+
+.my-message{
+  background-color: rgb(129, 129, 204);
+  color: white;
+  margin-top: 2px;
+  max-width: 300px;
+  width: fit-content;
+  padding: 4px 10px 4px 10px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.their-message{
+  background-color: #ccc;
+  margin-top: 2px;
+  max-width: 300px;
+  width: fit-content;
+  padding: 4px 10px 4px 10px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.my-message .content{
+  text-align: end;
+}
+.my-message .time{
+  text-align: end;
+}
+.their-message .content{
+  text-align: start;
+}
+
+.their-message .time{
+  text-align: start;
+}
+.content{
+  margin-bottom: 5px !important;
+}
+.time{
+  font-size: 10px;
+  margin-bottom: 5px !important;
+}
+
+
+/* Target all scrollbars */
+::-webkit-scrollbar {
+  width: 8px; /* Width of vertical scrollbar */
+  height: 8px; /* Height of horizontal scrollbar */
+}
+
+/* Handle of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* Color of the scrollbar handle */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Track (background) of the scrollbar */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+/* Optional: Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5); /* Darker color when hovered */
+}

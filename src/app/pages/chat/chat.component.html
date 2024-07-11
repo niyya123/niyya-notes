@@ -7,13 +7,29 @@
     <input [(ngModel)]="message" (keyup.enter)="sendMessage()" placeholder="Type your message here..." />
     <button (click)="sendMessage()">Send</button>
   </div> -->
-
+  <h3 class="text-center">General room chat</h3>
   <div class="chat-container">
-    <div class="messages">
-      <div *ngFor="let msg of messages">{{ msg }}</div>
+    <div class="messages_container" *ngIf="loading == false">
+      <div *ngFor="let msg of messages">
+        <div [id]="msg.index" [class]="isMyMessage(msg) ? 'my-message-container' : 'their-message-container'">
+          <div [class]="isMyMessage(msg) ? 'my-message' : 'their-message'">
+            <p class="content">{{ msg?.text }}</p>
+            <p class="time">{{ convertNumberToDate(msg?.createdAt) }}</p>
+          </div>
+         
+        </div>
+      </div>
     </div>
     <div class="input-box">
-      <input type="text" [(ngModel)]="message" placeholder="Type your message..." />
-      <button (click)="sendMessage()">Send</button>
+      <div class="row">
+        <div class="col-11">
+          <input nz-input type="text" [(ngModel)]="message" placeholder="Type your message..." (keyup.enter)="sendMessage()"/>
+        </div>
+        <div class="col-1">
+          <button nz-button nzType="primary" (click)="sendMessage()">Send</button>
+        </div>
+      </div>
+
+
     </div>
   </div>

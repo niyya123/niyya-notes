@@ -21,10 +21,14 @@ import { UserInfoService } from '../../shared/userInfo';
 export class HomeComponent implements OnInit {
 
   isCollapsed = false;
+  currentUser = ''
 
   constructor(private ussv: UserInfoService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    let user = this.ussv.getUser()
+    this.currentUser = user.username
+   }
 
   logout(){
     this.ussv.logout()
