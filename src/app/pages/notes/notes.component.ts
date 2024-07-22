@@ -67,10 +67,12 @@ export class NotesComponent implements OnInit {
   }
 
   async loadListNotes(){
+    let user = this.ussv.getUser()
     this.listNotes = []
     let data = {
       page: this.page,
       pageSize: this.pageSize,
+      author : user.username
     }
     let req = await this.notesSv.getNotes(data);
     this.listNotes = req.todos;
@@ -80,12 +82,13 @@ export class NotesComponent implements OnInit {
 
   async searchListNotes(){
     this.listNotes = []
+    let user = this.ussv.getUser()
     let data = {
       page: this.page,
       pageSize: this.pageSize,
       title: this.filter.title,
       isDone: this.filter.isDone == 2 ? null : this.filter.isDone == 1 ? true : false,
-      author: this.filter.author,
+      author: user.username,
       createdAt: this.filter.createdAt ? this.convertDateToNumber(this.filter.createdAt) : null,
       endDate: this.filter.endDate ? this.convertDateToNumber(this.filter.endDate) : null,
       text:this.filter.text

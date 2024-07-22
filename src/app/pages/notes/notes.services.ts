@@ -8,11 +8,12 @@ import { apiUrl } from '../../environments/environments.prod';
 export class NotesService{
 
     constructor(private http : HttpClient) { }
-    getNotes(params: { page?: number; pageSize?: number }): Promise<any>{
+    getNotes(params: { page?: number; pageSize?: number; author?:string }): Promise<any>{
         let reqParams = new HttpParams();
         if(params.page && params.pageSize){
             reqParams = reqParams.append('page', params.page.toString());
             reqParams = reqParams.append('pageSize', params.pageSize.toString());
+            reqParams = reqParams.append('author', params.author.toString());
         }
         return this.http.get<any>(`${apiUrl}/todos`,{ params: reqParams }).toPromise()
     }

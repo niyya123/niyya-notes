@@ -11,8 +11,8 @@
   <div class="chat-container">
     <div class="messages_container" *ngIf="loading == false">
       <div *ngFor="let msg of messages">
-        <div [id]="msg.index" [class]="isMyMessage(msg) ? 'my-message-container' : 'their-message-container'">
-          <div [class]="isMyMessage(msg) ? 'my-message' : 'their-message'">
+        <div [id]="msg.index" [class]="isMyMessage(msg) ? 'my-message-container' : 'their-message-container'" >
+          <div  nz-popover [class]="isMyMessage(msg) ? 'my-message' : 'their-message'" [nzPopoverContent]="msg.author" [nzPopoverPlacement]="isMyMessage(msg) ? 'topRight' : 'topLeft'">
             <p class="content">{{ msg?.text }}</p>
             <p class="time">{{ convertNumberToDate(msg?.createdAt) }}</p>
           </div>

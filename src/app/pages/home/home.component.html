@@ -15,6 +15,16 @@
           </li>
         </ul>
       </li>
+      <li nz-submenu nzOpen nzTitle="Gallery" nzIcon="picture">
+        <ul>
+          <li nz-menu-item>
+            <a routerLink="/home/gallery">Gallery</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="/home/add-image">Add Images</a>
+          </li>
+        </ul>
+      </li>
       <li nz-submenu nzOpen nzTitle="Chat" nzIcon="message">
         <ul>
           <li nz-menu-item >
@@ -51,7 +61,7 @@
             </span>
           </div>
           <div class="col text-end me-2">
-            Xin chào, người dùng <b>{{currentUser}}</b>
+            Hello, user <b>{{currentUser}}</b>
           </div>
         </div>
         <!-- <span class="header-trigger" (click)="isCollapsed = !isCollapsed">

@@ -7,6 +7,8 @@ import { UserInfoService } from '../../shared/userInfo';
 import { ChatService } from './chat.service';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 @Component({
   selector: 'app-chat',
@@ -15,7 +17,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     CommonModule,
     FormsModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzToolTipModule,
+    NzPopoverModule
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
