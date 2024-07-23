@@ -1,0 +1,37 @@
+.title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.gallery-grid {
+    display: grid;
+    gap: 10px;
+    /* Adjust the gap between items as needed */
+}
+
+.gallery-item {
+    position: relative;
+}
+
+.gallery-item:hover .delete-button {
+    display: block;
+    opacity: 1;
+    /* Show button on hover */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    /* Optional: for rounded corners */
+}
+
+.delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+    transition: opacity 2s ease;
+    opacity: 0;
+}

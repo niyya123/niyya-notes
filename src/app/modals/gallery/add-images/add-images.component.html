@@ -1,1 +1,10 @@
-<p>add-images works!</p>
+<div class="upload-container">
+    <label class="custom-file-upload">
+      <input type="file" (change)="onFileSelected($event)" accept="image/*"/>
+      <span>Choose Image</span>
+    </label>
+    <div class="image-preview" *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="Image preview"/>
+    </div>
+    <button nzType="primary" class="mt-2" nz-button nzSize="large" [nzLoading]="isLoading" (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+</div>

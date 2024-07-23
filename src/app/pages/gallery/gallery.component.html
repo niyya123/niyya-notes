@@ -1,1 +1,27 @@
-<p>gallery works!</p>
+<div class="row">
+  <div class="col">
+    <span class="title">My Gallery</span><span>&nbsp;(Total : <b>{{total}}</b> pictures)</span> &nbsp;
+    <button nz-button nzType="primary" nzShape="circle" nzSize="small"><span nz-icon nzType="reload" nzTheme="outline" (click)="loadImages()"></span></button>
+  </div>
+  <div class="col text-end">
+    <nz-pagination [nzPageIndex]="page" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="pageSize" [nzPageSizeOptions]="pageSizeOption" (nzPageIndexChange)="changePageIndex($event)" (nzPageSizeChange)="changePageSize($event)"></nz-pagination>
+  </div>
+</div>
+
+<div class="gallery-grid mt-2" [style.gridTemplateColumns]="'repeat(' + column + ', 1fr)'">
+    <div class="gallery-item" *ngFor="let image of listImages.slice(0, pageSize)">
+        <img nz-image [nzSrc]="image.url" [src]="image.url" alt="Gallery image">
+        <button [nzLoading]="deleteLoading" nz-button nzType="primary" nzSize="small" nzShape="circle" class="delete-button" nzDanger (click)="deleteImage(image._id)"><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+    </div>
+</div>
+
+<nz-empty *ngIf="total == 0"
+      nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+      [nzNotFoundContent]="contentTpl"
+    >
+      <ng-template #contentTpl>
+        <span>
+          Empty gallery
+        </span>
+      </ng-template>
+    </nz-empty>
