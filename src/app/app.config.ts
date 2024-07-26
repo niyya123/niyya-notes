@@ -8,7 +8,6 @@ import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TokenInterceptorFunction } from './shared/interceptors/checkToken';
 
@@ -30,7 +29,6 @@ export const appConfig: ApplicationConfig = {
       FormsModule,
       SocketIoModule.forRoot(config)
     ), 
-    provideAnimationsAsync(), 
     provideHttpClient(withInterceptors([TokenInterceptorFunction])),
   ],
 };
