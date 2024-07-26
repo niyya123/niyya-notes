@@ -8,7 +8,9 @@ import {
   MessageOutline,
   PictureOutline,
   ReloadOutline,
-  RedoOutline
+  RedoOutline,
+  RocketOutline,
+  CloseCircleOutline
 } from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
@@ -21,7 +23,9 @@ const icons = [
   MessageOutline,
   PictureOutline,
   ReloadOutline,
-  RedoOutline
+  RedoOutline,
+  RocketOutline,
+  CloseCircleOutline
 ];
 
 export function provideNzIcons(): EnvironmentProviders {

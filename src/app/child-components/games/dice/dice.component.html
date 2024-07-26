@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col text-end">
+    <button nzDanger nz-button nzType="primary" nzShape="circle" (click)="returnGamesPage($event)"><span nz-icon nzType="close-circle" nzTheme="outline"></span></button>
+  </div>
+</div>
+
+<div>
+  <div class="row">
+    <div class="col text-center">
+      Your current money : {{money}} $
+    </div>
+    <div class="col text-center">
+      Your bet : <nz-input-number class="w-25" [(ngModel)]="bet"></nz-input-number> $
+    </div>
+  
+  </div>
+  <p class="text-center" style="font-size: 20px;">
+    The house give number : <b>{{houseNumber}}</b>
+  </p>
+  <nz-radio-group [(ngModel)]="radioValue" class="w-100">
+    <div class="row">
+      <div class="col text-center">
+        <label nz-radio nzValue="A" style="font-size: 20px;">Less</label>
+      </div>
+      <div class="col text-center">
+        <label nz-radio nzValue="B" style="font-size: 20px;">Equal</label>
+      </div>
+      <div class="col text-center">
+        <label nz-radio nzValue="C" style="font-size: 20px;">Greater</label>
+      </div>
+    </div>
+    
+
+  </nz-radio-group>
+
+</div>
+
+<div class="text-center mt-2">
+  <button nz-button nzType="primary" nzSize="large" (click)="rollDice()"  [disabled]="rolling">Click to roll dice</button>
+</div>
+
+<!-- <div class="w-50">
+  <div [@roll]="rollState" class="dice">🎲</div>
+</div>
+<div>
+  <h5>Dice Result: {{ diceResult }}</h5>
+</div> -->
+<div class="text-center row">
+  <div class="col">
+    <div [@roll]="rollState" class="dice">
+      <div class="dice-face">{{ diceResult }}</div>
+    
+    </div>
+  </div>
+ <div class="col">
+  <div [@roll]="rollState" class="dice">
+    <div class="dice-face">{{ diceResult2 }}</div>
+  
+  </div>
+ </div>
+
+
+</div>
+
+<div class="row">
+  <div class="col text-center">
+    <h4>First dice: {{ diceResult }}</h4>
+  </div>
+  <div class="col text-center">
+    <h4>Second dice: {{ diceResult2 }}</h4>
+  </div>
+</div>
+
+<h5 class="text-center">Last total : {{totalCount}}</h5>
+
+<div>
+  <div class="row">
+    <div class="col-10">
+      <h3>History roll :</h3>
+    </div>
+    <div class="col-2 text-end">
+      <button nzDanger nz-button nzType="primary" (click)="clearHistory()">Clear history</button>
+    </div>
+  </div>
+  <ng-container *ngFor="let item of history">
+    <span style="font-size: 20px;">{{item}},&nbsp;</span>
+  </ng-container>
+</div>
+<div class="text-center" *ngIf="lost != null">
+  <h3 *ngIf="lost == false" style="color: green;">You won</h3>
+  <h3 *ngIf="lost == true" style="color: red;">You lost</h3>
+</div>
+
+
+
