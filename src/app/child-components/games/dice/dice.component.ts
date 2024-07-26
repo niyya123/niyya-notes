@@ -2,8 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule } from '@angular/forms';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -25,16 +23,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzIconModule,
     NzInputModule,
     NzInputNumberModule
-    // BrowserAnimationsModule
   ],
-  animations: [
-    trigger('roll', [
-      state('start', style({ transform: 'rotate(0deg)' })),
-      state('end', style({ transform: 'rotate(360deg)' })),
-      transition('start => end', animate('0.2s ease-in')),
-      transition('end => start', animate('0.2s ease-out'))
-    ])
-  ]
 })
 export class DiceComponent implements OnInit {
   radioValue = ''
