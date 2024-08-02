@@ -1,17 +1,18 @@
 .middle-all{
-    display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
 .custom-border{
+  width: 90%;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     border-radius: 5px;
 }
 
-.title{
-    color: white;
-}
+// .title{
+//     color: white;
+// }
 
 .custom_panel{
     background-color: #011429;
@@ -26,13 +27,35 @@
     height: 100%;
   }
   .center-both {
-    text-align: center;
-    width: 50%; /* or any desired width */
+    width: 100%;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // height: 100%;
   }
 
 .text-orange{
     color: #ff6701;
 }
-.text-not-center{
-    text-align:initial !important;;
+// .text-not-center{
+//     text-align:initial !important;;
+// }
+// .avatar-item{
+//   position: relative;
+// }
+// .avatar-item img {
+//   height: auto;
+//   display: block;
+//   border-radius: 8px;
+//   /* Optional: for rounded corners */
+// }
+// .delete-button {
+//   position: absolute;
+//   top: 5px;
+//   right: 5px;
+// }
+
+.avatar{
+  min-width: 50%;
+  max-width: 80%;
 }

@@ -1,31 +1,35 @@
-
 <div *ngIf="loading == false" class="middle-all">
   <div class="row custom-border">
     <div class="col-6">
-      <img src="/user-info.png" alt="" style="width: 100%;">
+      <div class="avatar-item text-center">
+        <img *ngIf="user?.avatarUrl == ''" src="/user-info.png" alt="" class="avatar">
+        <img *ngIf="user?.avatarUrl !== ''" src="{{user?.avatarUrl}}" alt="" class="avatar">
+        <button nz-button nzType="primary" nzSize="small" nzShape="circle" class="delete-button"
+          (click)="changeAvatar()"><span nz-icon nzType="edit" nzTheme="outline"></span></button>
+      </div>
     </div>
     <div class="col-6 custom_panel">
       <div class="custom-container w-100">
         <div class="center-both">
           <h2 class="text-center text-white">Personal Information</h2>
           <div class="row">
-            <div class="col-5">
+            <div class="col-3">
               <h5 class="text-orange text-not-center">Email :</h5>
             </div>
-            <div class="col-7">
+            <div class="col-9">
               <h5 class="text-white text-not-center">{{ user.email }}</h5>
             </div>
           </div>
           <div class="row text-not-center">
-            <div class="col-5">
+            <div class="col-3">
               <h5 class="text-orange text-not-center">Username :</h5>
             </div>
-            <div class="col-7">
+            <div class="col-9">
               <h5 class="text-white text-not-center">{{user.username}}</h5>
             </div>
           </div>
-      
-          
+
+
         </div>
       </div>
     </div>
