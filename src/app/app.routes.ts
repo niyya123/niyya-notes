@@ -8,11 +8,13 @@ import { GalleryComponent } from './pages/gallery/gallery.component';
 import { AddImagesComponent } from './modals/gallery/add-images/add-images.component';
 import { GamesComponent } from './pages/games/games.component';
 import { DiceComponent } from './child-components/games/dice/dice.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { NotesComponent } from './pages/notes/notes.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
   { path: 'login', loadChildren: () => import('./pages/login/login.routing').then(m => m.LOGIN_ROUTES) },
-  { path: 'register', loadChildren: () => import('./pages/register/register.routing').then(m => m.REGISTER_ROUTES) },
+  { path: 'register', component: RegisterComponent},
   {
     path: 'home',
     component: HomeComponent,
@@ -26,7 +28,7 @@ export const routes: Routes = [
       { path: 'games/dice', component: DiceComponent },
       { path: 'add-image', component: AddImagesComponent },
       { path: 'userInfo', component: UserInfoComponent },
-      { path: 'notes', loadChildren: () => import('./pages/notes/notes.routes').then(m => m.NOTES_ROUTES) }
+      { path: 'notes', component: NotesComponent }
     ]
   },
 

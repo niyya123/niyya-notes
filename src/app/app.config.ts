@@ -15,7 +15,7 @@ import { TokenInterceptorFunction } from './shared/interceptors/checkToken';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketService } from './shared/socket.services';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: 'wss://niyya-notes-api.onrender.com', options: {} };
 
 registerLocaleData(en);
 
