@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/niyya-my-notes/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
