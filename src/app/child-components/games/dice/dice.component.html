@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col text-end">
     <button nzDanger nz-button nzType="primary" nzShape="circle" (click)="returnGamesPage($event)"><span nz-icon nzType="close-circle" nzTheme="outline"></span></button>
   </div>
@@ -39,12 +39,6 @@
   <button nz-button nzType="primary" nzSize="large" (click)="rollDice()"  [disabled]="rolling">Click to roll dice</button>
 </div>
 
-<!-- <div class="w-50">
-  <div [@roll]="rollState" class="dice">🎲</div>
-</div>
-<div>
-  <h5>Dice Result: {{ diceResult }}</h5>
-</div> -->
 <div class="text-center row">
   <div class="col">
     <div [@roll]="rollState" class="dice">
@@ -92,4 +86,19 @@
 </div>
 
 
+ -->
 
+
+ <h4>test</h4>
+ <div class="row">
+  <div class="col-12">
+    <input type="text" matInput class="w-100"
+    ngxDaterangepickerMd
+    [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY HH:mm'}"
+    startKey="start"
+    endKey="end"
+    [timePicker]="true"
+    [(ngModel)]="selected"
+    name="daterange"/>
+  </div>
+ </div>

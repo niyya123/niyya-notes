@@ -9,6 +9,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import moment from 'moment';
 
 @Component({
   selector: 'app-dice',
@@ -23,7 +25,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     FormsModule,
     NzIconModule,
     NzInputModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NgxDaterangepickerMd
   ],
   animations: [
     trigger('roll', [
@@ -52,11 +55,23 @@ export class DiceComponent implements OnInit {
 
   history = []
 
+  selected: { startDate: moment.Moment, endDate: moment.Moment };
+
   constructor( private router : Router,
-    private noti : NzNotificationService) { }
+    private noti : NzNotificationService) { 
+    }
 
   ngOnInit() {
     this.houseNumber = Math.floor(Math.random() * (11 - 2 + 1)) + 2;
+  //   const now = moment();
+  //   console.log('now: ', now);
+  // const end = moment().add(30, 'minutes');
+  // console.log('end: ', end);
+
+  // this.selected = {
+  //   startDate: now,
+  //   endDate: end
+  // };
   }
 
   returnGamesPage($event:any){

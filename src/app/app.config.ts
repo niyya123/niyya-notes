@@ -14,6 +14,8 @@ import { TokenInterceptorFunction } from './shared/interceptors/checkToken';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketService } from './shared/socket.services';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+
 
 const config: SocketIoConfig = { url: 'wss://niyya-notes-api.onrender.com', options: {} };
 
@@ -28,7 +30,8 @@ export const appConfig: ApplicationConfig = {
     provideNzI18n(en_GB), 
     importProvidersFrom(
       FormsModule,
-      SocketIoModule.forRoot(config)
+      SocketIoModule.forRoot(config),
+      NgxDaterangepickerMd.forRoot(), 
     ), 
     provideAnimationsAsync(), 
     provideHttpClient(withInterceptors([TokenInterceptorFunction])),
