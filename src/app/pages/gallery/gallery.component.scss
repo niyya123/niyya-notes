@@ -3,28 +3,27 @@
     font-weight: bold;
 }
 
-.gallery-grid {
-    display: grid;
-    gap: 10px;
-    /* Adjust the gap between items as needed */
+.gallery-lightbox-container{
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+}
+.gallery{
+    line-height: 0;
+    column-count: 6;
+    column-gap: 15px;
 }
 
-.gallery-item {
+.gallery-img {
     position: relative;
 }
 
-.gallery-item:hover .delete-button {
-    display: block;
-    opacity: 1;
-    /* Show button on hover */
-}
-
-.gallery-item img {
+.gallery-img img{
     width: 100%;
     height: auto;
-    display: block;
-    border-radius: 8px;
-    /* Optional: for rounded corners */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .21);
 }
 
 .delete-button {
@@ -35,3 +34,18 @@
     transition: opacity 2s ease;
     opacity: 0;
 }
+
+.gallery-img:hover .delete-button {
+    display: block;
+    opacity: 1;
+    /* Show button on hover */
+}
+
+// .delete-button {
+//     position: absolute;
+//     top: 5px;
+//     right: 5px;
+//     display: none;
+//     transition: opacity 2s ease;
+//     opacity: 0;
+// }

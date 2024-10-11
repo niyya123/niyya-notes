@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { apiUrl } from '../../../environments/environments.prod';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { catchError, from, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,21 @@ constructor(private http: HttpClient,private storage: AngularFireStorage, privat
       filename: filename
     }
     return this.http.post<any>(`${apiUrl}/gallery/upload`,data).toPromise()
+  }
+
+  checkFileExits(filePath:string){
+    const fileRef = this.storage.ref(filePath);
+    return from(fileRef.getMetadata()).pipe(
+      switchMap((metadata) => {
+        return of(true);
+      }),
+      catchError((error) => {
+        if (error.code === 'storage/object-not-found') {
+          return of(false);
+        }
+        // Handle other errors
+        return of(false);
+      })
+    );
   }
 }

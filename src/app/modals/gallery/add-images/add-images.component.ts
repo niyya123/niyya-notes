@@ -45,16 +45,24 @@ export class AddImagesComponent {
     if (this.selectedFile) {
       let user = this.ussv.getUser()
       let userId = this.ussv.getUserId()
-      this.aisv.uploadImages(this.selectedFile, userId).then(async(url)=>{
-        console.log('url: ', url);
-        const filename = this.selectedFile?.name
-        this.selectedFile = null;
-        this.imageUrl = null;
-        this.isLoading = false
-
-        let req = await this.aisv.uploadImagesInDb(url,user.username,filename)
-        if(req.code == 200){
-          this.noti.success('Success','User uploaded image successfully')
+      const filepath = `${userId}/gallery/${this.selectedFile?.name}`
+      this.aisv.checkFileExits(filepath).subscribe((exists)=>{
+        if (exists) {
+          this.noti.error('Error','Image already exists')
+        } else {
+          this.aisv.uploadImages(this.selectedFile, userId).then(async(url)=>{
+            console.log('url: ', url);
+            const filename = this.selectedFile?.name
+            this.selectedFile = null;
+            this.imageUrl = null;
+            this.isLoading = false
+    
+            let req = await this.aisv.uploadImagesInDb(url,user.username,filename)
+            console.log('req: ', req);
+            if(req.code == 200){
+              this.noti.success('Success','User uploaded image successfully')
+            }
+          })
         }
       })
     } else {

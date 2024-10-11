@@ -8,11 +8,13 @@
   </div>
 </div>
 
-<div class="gallery-grid mt-2" [style.gridTemplateColumns]="'repeat(' + column + ', 1fr)'">
-    <div class="gallery-item" *ngFor="let image of listImages.slice(0, pageSize)">
+<div class="gallery-lightbox-container">
+  <div class="gallery mt-2">
+    <div class="gallery-img" *ngFor="let image of listImages.slice(0, pageSize)">
         <img nz-image [nzSrc]="image.url" [src]="image.url" alt="Gallery image">
-        <button [nzLoading]="deleteLoading" nz-button nzType="primary" nzSize="small" nzShape="circle" class="delete-button" nzDanger (click)="deleteImage(image._id)"><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+        <button [nzLoading]="deleteLoading" nz-button nzType="primary" nzSize="small" nzShape="circle" class="delete-button" nzDanger (click)="deleteImage(image._id,image.fileName)"><span nz-icon nzType="delete" nzTheme="outline"></span></button>
     </div>
+</div>
 </div>
 
 <nz-empty *ngIf="total == 0"

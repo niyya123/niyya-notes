@@ -32,15 +32,15 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { firebaseConfig } from './environments/firebase_config';
 
-// const config: SocketIoConfig = {
-//   url: 'wss://niyya-notes-api.onrender.com',
-//   options: {},
-// };
-
 const config: SocketIoConfig = {
-  url: 'http://localhost:3000',
+  url: 'wss://niyya-notes-api.onrender.com',
   options: {},
 };
+
+// const config: SocketIoConfig = {
+//   url: 'http://localhost:3000',
+//   options: {},
+// };
 
 registerLocaleData(en);
 

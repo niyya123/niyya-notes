@@ -11,6 +11,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 @Component({
   selector: 'app-gallery',
   standalone: true,
@@ -23,80 +24,97 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     NzButtonModule,
     NzEmptyModule,
     NzModalModule,
-    NzImageModule
+    NzImageModule,
   ],
   templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.scss'
+  styleUrl: './gallery.component.scss',
 })
 export class GalleryComponent implements OnInit {
   constructor(
-    private glsv : GalleryService,
-    private ussv : UserInfoService,
-    private modal : NzModalService,
-    private noti : NzNotificationService
-  ){}
+    private glsv: GalleryService,
+    private ussv: UserInfoService,
+    private modal: NzModalService,
+    private noti: NzNotificationService,
+    private storage: AngularFireStorage
+  ) {}
 
-  listImages : any
-  deleteLoading : boolean = false
+  listImages: any;
+  deleteLoading: boolean = false;
 
-  total:any
-  page = 1
-  pageSize = 20
-  pageSizeOption = [5,10,15,20]
+  total: any;
+  page = 1;
+  pageSize = 20;
+  pageSizeOption = [5, 10, 15, 20];
 
-  column = 5
+  column = 5;
 
   get rows(): number {
     return Math.ceil(this.pageSize / this.column);
   }
 
-  async ngOnInit(){
+  async ngOnInit() {
     await this.loadImages();
   }
 
-  async loadImages(){
-    let user = this.ussv.getUser()
-    this.listImages = []
+  async loadImages() {
+    let user = this.ussv.getUser();
+    this.listImages = [];
     let data = {
       page: this.page,
       pageSize: this.pageSize,
-      author : user.username
-    }
+      author: user.username,
+    };
     let req = await this.glsv.getImages(data);
     this.listImages = req.images;
     this.total = req.totalItems;
     console.log('req: ', req);
   }
 
-  changePageIndex($event:any){
+  changePageIndex($event: any) {
     this.page = $event;
     this.loadImages();
   }
 
-  changePageSize($event:any){
-    this.pageSize = $event
+  changePageSize($event: any) {
+    this.pageSize = $event;
     this.loadImages();
   }
 
-  deleteImage(id: string): void {
+  deleteImage(id: string, filename: any): void {
     this.modal.confirm({
       nzTitle: 'Delete',
       nzContent: 'Do you want to delete this image',
       nzCentered: true,
-      nzOnOk:async ()=>{
-        try {
-          this.deleteLoading = true
-          let req = await this.glsv.deleteImage(id)
-          if(req.code == 200){
-            this.noti.success('Success','Delete image successfully')
-            this.deleteLoading = false
-            await this.loadImages();
-          }
-        } catch (error) {
-          this.noti.error('Error','Delete image unsuccessfully')
-          this.deleteLoading = false
-        }
-      }
-    })
+      nzOnOk: async () => {
+        let userId = this.ussv.getUserId();
+        const filepath = `${userId}/gallery/${filename}`;
+        const fileRef = this.storage.ref(filepath);
+        fileRef.delete().subscribe({
+          next: async () => {
+            let req = await this.glsv.deleteImage(id);
+            if (req.code == 200) {
+              this.noti.success('Success', 'Delete image successfully');
+              this.deleteLoading = false;
+              await this.loadImages();
+            }
+          },
+          error: (error) => {
+            console.error('Error deleting file: ', error);
+          },
+        });
+        // try {
+        //   this.deleteLoading = true
+        //   let req = await this.glsv.deleteImage(id)
+        //   if(req.code == 200){
+        //     this.noti.success('Success','Delete image successfully')
+        //     this.deleteLoading = false
+        //     await this.loadImages();
+        //   }
+        // } catch (error) {
+        //   this.noti.error('Error','Delete image unsuccessfully')
+        //   this.deleteLoading = false
+        // }
+      },
+    });
   }
 }
