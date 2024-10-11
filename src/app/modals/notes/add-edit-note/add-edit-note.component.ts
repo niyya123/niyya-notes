@@ -79,7 +79,7 @@ export class AddEditNoteComponent implements OnInit {
   cancel(){
     this.nzmodal.close()
   }
-  async create(){
+  async create(number?: any){
     let user = this.ussv.getUser()
     let data = {
 
@@ -96,9 +96,16 @@ export class AddEditNoteComponent implements OnInit {
     console.log('req: ', req);
     if(req?.code == 200){
       this.noti.success('Success','User created successfully')
-      this.nzmodal.close({
-        message:'Tạo thành công'
-      })
+      if(number){
+        this.nzmodal.close({
+          message:'Tạo thành công. Tạo lần nữa'
+        })
+      }else{
+        this.nzmodal.close({
+          message:'Tạo thành công'
+        })
+      }
+
     }
   }
 

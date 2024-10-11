@@ -35,7 +35,7 @@ export class AvatarChangeComponent implements OnInit {
     private modalRef : NzModalRef
     ) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
   onFileSelected(event: any): void {
@@ -52,27 +52,24 @@ export class AvatarChangeComponent implements OnInit {
   async onUpload() {
     if (this.selectedFile) {
       let user = this.ussv.getUser()
-      try {
-        this.isLoading = true
-        let req = await this.acsv.changeAvatar(this.selectedFile, this.userId.user_id)
+      this.acsv.changeAvatar(this.selectedFile,this.userId.user_id).then(async (url)=>{
+        console.log('url: ', url);
+        this.selectedFile = null;
+        this.imageUrl = null;
+        this.isLoading = false
+
+        let req = await this.acsv.changeAvatarInDb(url,this.userId.user_id)
         if(req.code == 200){
-          this.noti.success('Success','uploaded image successfully')
-          this.selectedFile = null;
-          this.imageUrl = null;
-          this.isLoading = false
+          this.noti.success('Success','User changed avatar successfully')
           this.modalRef.close({
             message:"Đổi thành công"
-          }) // close modal with true value to notify parent component that image has been uploaded successfully
+          }) 
         }
-      } catch (error) {
-        this.noti.error('Error',error.error.error)
+      })
+    }else {
+        this.noti.error('Error','No file selected')
         this.isLoading = false
       }
-
-    } else {
-      this.noti.error('Error','No file selected')
-      this.isLoading = false
-    }
   }
 
 }

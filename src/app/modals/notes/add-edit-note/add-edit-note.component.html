@@ -43,7 +43,7 @@
             <button class="w-100" nz-button nzType="primary" (click)="update()">Update</button>
         </div>
         <div nz-col nzSpan="5" *ngIf="!id">
-            <button class="w-100" nz-button nzType="primary">Create then again </button>
+            <button class="w-100" nz-button nzType="primary" (click)="create(1)">Create then again </button>
         </div>
     </div>
 </form>

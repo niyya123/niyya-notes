@@ -44,20 +44,19 @@ export class AddImagesComponent {
   async onUpload() {
     if (this.selectedFile) {
       let user = this.ussv.getUser()
-      try {
-        this.isLoading = true
-        let req = await this.aisv.uploadImages(this.selectedFile, user.username)
-        if(req.code == 200){
-          this.noti.success('Success','uploaded image successfully')
-          this.selectedFile = null;
-          this.imageUrl = null;
-          this.isLoading = false
-        }
-      } catch (error) {
-        this.noti.error('Error',error.error.error)
+      let userId = this.ussv.getUserId()
+      this.aisv.uploadImages(this.selectedFile, userId).then(async(url)=>{
+        console.log('url: ', url);
+        const filename = this.selectedFile?.name
+        this.selectedFile = null;
+        this.imageUrl = null;
         this.isLoading = false
-      }
 
+        let req = await this.aisv.uploadImagesInDb(url,user.username,filename)
+        if(req.code == 200){
+          this.noti.success('Success','User uploaded image successfully')
+        }
+      })
     } else {
       this.noti.error('Error','No file selected')
       this.isLoading = false

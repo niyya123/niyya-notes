@@ -149,6 +149,7 @@ export class NotesComponent implements OnInit {
       }
       if (res?.message == "Tạo thành công. Tạo lần nữa") {
         this.loadListNotes();
+        this.openAddModal()
       }
     })
   }

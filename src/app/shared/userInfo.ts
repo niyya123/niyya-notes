@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { apiUrl } from '../environments/environments.prod';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
 
 
 
@@ -16,7 +18,8 @@ export class UserInfoService {
   private id: string = '';
 
   constructor(private router: Router,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private afAuth: AngularFireAuth) { }
 
   setUser(user:any): void {
     let data = {
@@ -54,7 +57,12 @@ export class UserInfoService {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    this.firebaseSignOut()
     this.router.navigate(['/login']);
+  }
+
+  firebaseSignOut() {
+    return this.afAuth.signOut();
   }
 
   apiGetUserInfo(): Promise<any> {
@@ -63,5 +71,9 @@ export class UserInfoService {
       'Authorization': `${currentToken}`
     });
     return this.http.get<any>(`${apiUrl}/user`, { headers }).toPromise()
+  }
+
+  getAuthState(): Observable<any>{
+    return this.afAuth.authState;
   }
 }
