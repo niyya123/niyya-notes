@@ -25,6 +25,8 @@ export class GamesComponent implements OnInit {
   toGames(string:any){
     if(string == 'dice'){
       this.router.navigate(['/home/games',string])
+    }else if(string == 'snake'){
+      this.router.navigate(['/home/games',string])
     }
   }
 

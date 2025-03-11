@@ -10,6 +10,7 @@ import { GamesComponent } from './pages/games/games.component';
 import { DiceComponent } from './child-components/games/dice/dice.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NotesComponent } from './pages/notes/notes.component';
+import { SnakeComponent } from './child-components/games/snake/snake.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -26,6 +27,7 @@ export const routes: Routes = [
       { path: 'gallery', component: GalleryComponent },
       { path: 'games', component: GamesComponent },
       { path: 'games/dice', component: DiceComponent },
+      { path: 'games/snake', component: SnakeComponent },
       { path: 'add-image', component: AddImagesComponent },
       { path: 'userInfo', component: UserInfoComponent },
       { path: 'notes', component: NotesComponent }

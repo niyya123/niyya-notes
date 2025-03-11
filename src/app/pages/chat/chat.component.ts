@@ -9,6 +9,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-chat',
@@ -36,6 +37,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   constructor(private socketService: SocketService,
     private socket : Socket,
+    private nzNoti : NzNotificationService,
     private ussv : UserInfoService,
     private csv : ChatService) {}
   ngAfterViewChecked(){
@@ -49,6 +51,11 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     // Example: Listen for server message
     this.socket.on('New chat message receive', (data: any) => {
       console.log('Received from server:', data);
+      let temp = this.ussv.getUser()
+      if(data.author == temp.username){}else{
+        this.nzNoti.info('New message from '+data.author+'',''+data.text+'')
+      }
+
       this.messages.push(data);
       this.total = data.index 
       this.shouldScrollToBottom = true;
