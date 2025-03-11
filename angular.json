@@ -37,11 +37,13 @@
               }
             ],
             "styles": [
-              "https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/theme.less",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
