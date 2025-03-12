@@ -98,34 +98,29 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   convertDateToNumber(date:Date){
     const year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString(); // Months are zero-based in JavaScript
-    let day = date.getDate().toString();
-  
-    // Ensure month and day are two digits
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-  
-    // Combine into YYYYMMDD format and convert to number
-    const formattedDate = `${year}${month}${day}`;
-    return parseInt(formattedDate, 10);
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Ensure 2 digits
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+
+  return Number(`${year}${month}${day}${hours}${minutes}${seconds}`);
   }
 
   convertNumberToDate(value:any){
-    value = value.toString()
+    const str = value.toString();
 
-    // Extract year, month, and day from the input string
-    const year = value.substr(0, 4);
-    const month = value.substr(4, 2);
-    const day = value.substr(6, 2);
+  const year = parseInt(str.substring(0, 4), 10);
+  const month = parseInt(str.substring(4, 6), 10) - 1; // Months are 0-based in JS
+  const day = parseInt(str.substring(6, 8), 10);
+  const hours = parseInt(str.substring(8, 10), 10);
+  const minutes = parseInt(str.substring(10, 12), 10);
+  const seconds = parseInt(str.substring(12, 14), 10);
 
-    // Construct the formatted date string in DD/MM/YYYY format
-    const formattedDate = `${day}/${month}/${year}`;
-
-    return formattedDate;
+  return new Date(year, month, day, hours, minutes, seconds).toLocaleString('en-GB', { 
+    hour: '2-digit', minute: '2-digit', second: '2-digit', 
+    day: '2-digit', month: '2-digit', year: 'numeric' 
+  }).replace(',', ' at');;
   }
 
   isMyMessage(msg:any){

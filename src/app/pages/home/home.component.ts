@@ -4,6 +4,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { UserInfoService } from '../../shared/userInfo';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { FormsModule } from '@angular/forms';
+import { DarkModeService } from '../../shared/dark-mode.services';
 
 @Component({
   selector: 'app-home',
@@ -15,15 +18,19 @@ import { UserInfoService } from '../../shared/userInfo';
     NzMenuModule,
     RouterOutlet,
     NzIconModule,
-    RouterModule
+    RouterModule,
+    NzSwitchModule,
+    FormsModule
   ]
 })
 export class HomeComponent implements OnInit {
-
+  darkMode : any
   isCollapsed = false;
   currentUser = ''
 
-  constructor(private ussv: UserInfoService) { }
+  constructor(private ussv: UserInfoService,
+    private darkModeService: DarkModeService
+  ) { }
 
   ngOnInit() {
     let user = this.ussv.getUser()
@@ -32,6 +39,10 @@ export class HomeComponent implements OnInit {
 
   logout(){
     this.ussv.logout()
+  }
+
+  checkDarkMode($event:any){
+    this.darkModeService.toggleDarkMode();
   }
 
 }
