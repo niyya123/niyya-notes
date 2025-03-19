@@ -15,9 +15,4 @@ import { DarkModeService } from './shared/dark-mode.services';
 })
 export class AppComponent {
   isCollapsed = false;
-  constructor(private darkModeService: DarkModeService) {}
-
-  toggleTheme() {
-    this.darkModeService.toggleDarkMode();
-  }
 }
