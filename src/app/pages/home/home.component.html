@@ -66,6 +66,8 @@
             <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
               <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
             </span>
+            <span><nz-switch [ngModel]="darkMode" name="" (ngModelChange)="toggleTheme()"></nz-switch>
+            </span>
           </div>
           <div class="col text-end me-2">
             Hello, user <b>{{currentUser}}</b>

@@ -24,7 +24,7 @@ import { DarkModeService } from '../../shared/dark-mode.services';
   ]
 })
 export class HomeComponent implements OnInit {
-  darkMode : any
+  darkMode = false
   isCollapsed = false;
   currentUser = ''
 
@@ -35,14 +35,31 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     let user = this.ussv.getUser()
     this.currentUser = user.username
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      this.darkMode = true;
+      this.setTheme('dark');
+    }else{
+      this.darkMode = false;
+      this.setTheme('light');
+    }
    }
 
   logout(){
     this.ussv.logout()
   }
 
-  checkDarkMode($event:any){
-    this.darkModeService.toggleDarkMode();
+  toggleTheme() {
+    this.darkMode = !this.darkMode;
+    const theme = this.darkMode ? 'dark' : 'light';
+    this.setTheme(theme);
+    localStorage.setItem('theme', theme); // Persist the choice
   }
+
+  private setTheme(theme: string) {
+    const linkElement = document.getElementById('theme-style') as HTMLLinkElement;
+    linkElement.href = `/assets/themes/${theme}.css`;
+  }
+
 
 }
